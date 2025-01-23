@@ -10,6 +10,7 @@ type QuestionProps = {
 
 export default function Question(props: QuestionProps) {
   const { question, dispatch, answer } = props;
+  
   return (
     <div>
       <h4>{question.question}</h4>
