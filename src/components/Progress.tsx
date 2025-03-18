@@ -1,13 +1,13 @@
-type PropgressProps = {
-  index: number;
-  questionsNum: number;
-  points: number;
-  maxPossiblePoints: number;
-  answer: number | null;
-};
+import { useQuestions } from "../context/questionsContext";
+import { QuestionType } from "../types";
 
-function Progress(props: PropgressProps) {
-  const { index, questionsNum, points, maxPossiblePoints, answer } = props;
+function Progress() {
+  const { index, questions, points, answer } = useQuestions();
+  const questionsNum = questions.length;
+  const maxPossiblePoints: number = questions.reduce(
+    (prev: number, cur: QuestionType) => prev + cur.points,
+    0
+  );
 
   return (
     <header className="progress">

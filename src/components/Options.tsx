@@ -2,7 +2,7 @@ import { QuestionType } from "../types";
 
 type OptionProps = {
   question: QuestionType;
-  answer: number;
+  answer: number | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: any;
 };
@@ -20,7 +20,11 @@ function Options(props: OptionProps) {
       {question.options.map((option: string, index: number) => (
         <button
           className={`btn btn-option ${index === answer ? "answer" : ""} ${
-            hasAnswered ? index === question.correctOption ? "correct" : "wrong" : ""
+            hasAnswered
+              ? index === question.correctOption
+                ? "correct"
+                : "wrong"
+              : ""
           }`}
           key={option}
           onClick={() => addAnswer(index)}

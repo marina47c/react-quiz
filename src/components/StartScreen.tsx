@@ -1,10 +1,8 @@
-type StartScreenProps = {
-  numberOfQuestions: number;
-  dispatch?: React.Dispatch<{ type: string }>;
-};
+import { useQuestions } from "../context/questionsContext";
 
-export default function StartScreen(props: StartScreenProps) {
-  const { numberOfQuestions, dispatch } = props;
+export default function StartScreen() {
+  const { questions, dispatch } = useQuestions();
+  const numberOfQuestions: number = questions?.length || 0;
 
   const startGame = () => dispatch?.({ type: "start" });
 

@@ -1,13 +1,8 @@
-type NextButtonProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dispatch: any;
-  answer: number | null;
-  index: number;
-  numOfQuestions: number;
-};
+import { useQuestions } from "../context/questionsContext";
 
-export default function NextButton(props: NextButtonProps) {
-  const { dispatch, answer, index, numOfQuestions } = props;
+export default function NextButton() {
+  const { questions, answer, index, dispatch } = useQuestions();
+  const numberOfQuestions: number = questions?.length || 0;
 
   function nextQuestion() {
     dispatch({ type: "nextQuestion" });
@@ -19,7 +14,7 @@ export default function NextButton(props: NextButtonProps) {
 
   if (answer === null) return null;
 
-  if (index < numOfQuestions - 1) {
+  if (index < numberOfQuestions - 1) {
     return (
       <button className="btn btn-ui" onClick={nextQuestion}>
         Next
@@ -27,7 +22,7 @@ export default function NextButton(props: NextButtonProps) {
     );
   }
 
-  if (index === numOfQuestions - 1) {
+  if (index === numberOfQuestions - 1) {
     return (
       <button className="btn btn-ui" onClick={finishQuiz}>
         Finish
