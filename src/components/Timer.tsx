@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import { useQuestions } from "../context/questionsContext";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Timer({ dispatch, secondsRemaining }: any) {
-  const mins = Math.floor(secondsRemaining / 60);
-  const seconds = secondsRemaining % 60;
+export default function Timer() {
+  const { secondsRemaining, dispatch } = useQuestions();
+  const mins = Math.floor((secondsRemaining ?? 0) / 60);
+  const seconds = (secondsRemaining ?? 0) % 60;
 
   useEffect(
     function () {

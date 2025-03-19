@@ -1,13 +1,9 @@
 import { useQuestions } from "../context/questionsContext";
-import { QuestionType } from "../types";
 
 function Progress() {
-  const { index, questions, points, answer } = useQuestions();
+  const { index, questions, points, answer, maxNumberOfPoints } =
+    useQuestions();
   const questionsNum = questions.length;
-  const maxPossiblePoints: number = questions.reduce(
-    (prev: number, cur: QuestionType) => prev + cur.points,
-    0
-  );
 
   return (
     <header className="progress">
@@ -16,7 +12,7 @@ function Progress() {
         Question <strong>{index + 1}</strong> / {questionsNum}
       </p>
       <p>
-        Points {points} / {maxPossiblePoints}
+        Points {points} / {maxNumberOfPoints}
       </p>
     </header>
   );

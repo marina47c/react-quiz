@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import {
   IAction,
-  ICityContext,
+  IQuizContext,
   IQuestionsProvider,
   IState,
 } from "./interfaces";
+import { QuestionType } from "../types";
 
 const SECS_PER_QUESTION = 30;
 
@@ -73,7 +74,7 @@ function reducer(state: IState, action: IAction) {
   }
 }
 
-const QuestionsContext = createContext<ICityContext>({
+const QuestionsContext = createContext<IQuizContext>({
   questions: [],
   status: "",
   index: 0,
@@ -81,6 +82,8 @@ const QuestionsContext = createContext<ICityContext>({
   points: 0,
   highscore: 0,
   secondsRemaining: null,
+  maxNumberOfPoints: 0,
+  numberOfQuestions: 0,
   dispatch: () => {},
 });
 
@@ -95,6 +98,13 @@ function QuestionsProvider({ children }: IQuestionsProvider) {
     highscore,
     secondsRemaining,
   } = state;
+
+  const maxNumberOfPoints: number = questions.reduce(
+    (prev: number, cur: QuestionType) => prev + cur.points,
+    0
+  );
+
+  const numberOfQuestions: number = questions?.length || 0;
 
   useEffect(function () {
     fetch("http://localhost:8000/questions")
@@ -117,6 +127,8 @@ function QuestionsProvider({ children }: IQuestionsProvider) {
         points,
         highscore,
         secondsRemaining,
+        maxNumberOfPoints,
+        numberOfQuestions,
         dispatch,
       }}
     >

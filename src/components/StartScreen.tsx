@@ -1,8 +1,7 @@
 import { useQuestions } from "../context/questionsContext";
 
 export default function StartScreen() {
-  const { questions, dispatch } = useQuestions();
-  const numberOfQuestions: number = questions?.length || 0;
+  const { numberOfQuestions, dispatch } = useQuestions();
 
   const startGame = () => dispatch?.({ type: "start" });
 

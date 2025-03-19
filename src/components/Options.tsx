@@ -1,14 +1,8 @@
-import { QuestionType } from "../types";
+import { useQuestions } from "../context/questionsContext";
 
-type OptionProps = {
-  question: QuestionType;
-  answer: number | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dispatch: any;
-};
-
-function Options(props: OptionProps) {
-  const { question, dispatch, answer } = props;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function Options({ question }: any) {
+  const { dispatch, answer } = useQuestions();
   const hasAnswered = answer !== null;
 
   function addAnswer(index: number) {

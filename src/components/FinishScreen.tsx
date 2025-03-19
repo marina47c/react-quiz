@@ -1,13 +1,8 @@
-type FinishScreenProps = {
-  points: number;
-  maxNumberOfPoints: number;
-  highscore: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dispatch: any;
-};
+import { useQuestions } from "../context/questionsContext";
 
-function FinishScreen(props: FinishScreenProps) {
-  const { points, maxNumberOfPoints, highscore, dispatch } = props;
+function FinishScreen() {
+  const { points, highscore, maxNumberOfPoints, dispatch } = useQuestions();
+
   const percentage = (points / maxNumberOfPoints) * 100;
 
   let emoji;
